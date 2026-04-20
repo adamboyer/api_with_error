@@ -6,10 +6,11 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     public String getUserName(String id) {
-        // INTENTIONAL BUG:
-        // Will throw NumberFormatException if id is not numeric
-        int userId = Integer.parseInt(id);
+        if (id == null || !id.matches("\\d+")) {
+            return "Invalid user id";
+        }
 
+        int userId = Integer.parseInt(id);
         return "User-" + userId;
     }
 }
